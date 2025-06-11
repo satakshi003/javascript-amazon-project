@@ -73,6 +73,8 @@ function updateCartQuantity(){
     .innerHTML = cartQuantity;
 
 }
+updateCartQuantity();
+
 
 const addedMessageTimeouts = {};
 
