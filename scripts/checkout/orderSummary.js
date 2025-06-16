@@ -30,7 +30,8 @@ export function renderOrderSummary(){
 
     cartSummaryHTML += `
 
-    <div class="cart-item-container  js-cart-item-container-${matchingProducts.id}">
+    <div class="cart-item-container  
+    js-cart-item-container-${matchingProducts.id}">
             <div class="delivery-date">
               Delivery date:${dateString}
             </div>
@@ -46,7 +47,9 @@ export function renderOrderSummary(){
                 <div class="product-price">
                   $${formatCurrency(matchingProducts.priceCents)}
                 </div>
-                <div class="product-quantity">
+                <div class="product-quantity
+                js-product-quantity-${matchingProducts.id}
+                ">
                   <span>
                     Quantity: <span class="quantity-label js-quantity-label-${matchingProducts.id}">${cartItem.quantity}</span>
                   </span>
@@ -58,7 +61,7 @@ export function renderOrderSummary(){
                   <span class="save-quantity-link link-primary  js-save-link" 
                   data-product-id="${matchingProducts.id}">Save
                   </span>
-                  <span class="delete-quantity-link link-primary  js-delete-link"data-product-id="${matchingProducts.id}" >
+                  <span class="delete-quantity-link link-primary  js-delete-link js-delete-link-${matchingProducts.id}"data-product-id="${matchingProducts.id}" >
                     Delete
                   </span>
                 </div>
@@ -134,6 +137,7 @@ export function renderOrderSummary(){
 
     document.querySelector('.js-return-to-home-link').innerHTML = `${cartQuantity} items`;
     }
+
     updateCartQuantity();
 
     document.querySelectorAll('.js-update-link').forEach((link) => {
