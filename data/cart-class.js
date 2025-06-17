@@ -1,12 +1,15 @@
+class Cart {
+  cartItems;
+  localStorageKey;
 
-
-function Cart(localStorageKey) {
-  const cart = {
-    cartItems: undefined,
+  constructor(localStorageKey){
+  this.localStorageKey = localStorageKey;
+  this.loadFromStorage();
   
+  }
   
-   loadFromStorage(){
-    this.cartItems = JSON.parse(localStorage.getItem('localStorageKey'));
+  loadFromStorage(){
+    this.cartItems = JSON.parse(localStorage.getItem(this.localStorageKey));
   
     if (!this.cartItems) {
       this.cartItems = [
@@ -21,14 +24,15 @@ function Cart(localStorageKey) {
         }
       ];
     }
-  },
+  }
+
   
-   saveToStorage() {
-    localStorage.setItem('LocalStorageKey', JSON.stringify(this.cartItems));
-  },
+  saveToStorage() {
+    localStorage.setItem(this.LocalStorageKey, JSON.stringify(this.cartItems));
+  }
+
   
-  
-   addToCart(productId, quantity) {
+  addToCart(productId, quantity) {
     let matchingItem;
    
    this.cartItems.forEach((cartItem) => {
@@ -47,9 +51,8 @@ function Cart(localStorageKey) {
       });
     }
    this.saveToStorage();
-  },
-  
-  
+  }
+
   removeFromCart(productId){
     const newCart = [];
   
@@ -61,8 +64,8 @@ function Cart(localStorageKey) {
    this.cartItems = newCart;
   
    this.saveToStorage();
-  },
-  
+  }
+   
   
   calculateCartQuantity(){
     let cartQuantity = 0;
@@ -72,9 +75,10 @@ function Cart(localStorageKey) {
    });
    
    return cartQuantity;
-   },
+   }
   
-  
+
+   
    updateQuantity(productId, newQuantity){
     let matchingItem;
     this.cartItems.forEach((cartItem) => {
@@ -85,8 +89,7 @@ function Cart(localStorageKey) {
   matchingItem.quantity = newQuantity;
   
   this.saveToStorage();
-  },
-  
+  }
   
   updateDeliveryOption(productId, deliveryOptionId){
     let matchingItem;
@@ -99,20 +102,15 @@ function Cart(localStorageKey) {
   
   this.saveToStorage();
   }
-  };
-
-
-  return cart;
+  
 }
 
-const cart = Cart('cart-oop');
-const businessCart = Cart('cart-business');
-
-cart.loadFromStorage();
+const cart = new Cart('cart-oop');
+const businessCart = new Cart('cart-business');
 
 
 
-businessCart.loadFromStorage();
 
 console.log(cart);
 console.log(businessCart);
+console.log(businessCart instanceof Cart);
