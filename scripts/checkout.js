@@ -5,6 +5,8 @@ import { renderPaymentSummary } from "./checkout/paymentSummary.js";
 import { loadProducts, loadProductsFetch } from "../data/products.js";
 
 import { loadCart } from "../data/cart.js";
+
+import { renderCheckoutHeader } from "./checkout/checkoutHeader.js";
 //import '../data/cart-class.js ';
 //import '../data/backend-practice.js';
 
@@ -32,6 +34,8 @@ async function loadPage() {
   renderPaymentSummary();
 }
 loadPage();
+
+renderCheckoutHeader();
 
 /*
 Promise.all([
