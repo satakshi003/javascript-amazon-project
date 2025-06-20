@@ -4,6 +4,7 @@ import { formatCurrency} from '../utils/money.js';
 import dayjs from 'https://unpkg.com/supersimpledev@8.5.0/dayjs/esm/index.js';
 import {deliveryOptions, getDeliveryOption} from '../../data/deliveryOption.js';
 import { renderPaymentSummary } from './paymentSummary.js';
+import { renderCheckoutHeader } from './checkoutHeader.js';
 
 
 
@@ -126,6 +127,7 @@ export function renderOrderSummary(){
         const productId = link.dataset.productId;
         removeFromCart(productId);
        
+        renderCheckoutHeader();
         renderOrderSummary();
         renderPaymentSummary();
       });
