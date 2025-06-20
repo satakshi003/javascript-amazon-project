@@ -60,6 +60,27 @@ constructor(productDetails) {
   }
 }
 
+class Appliance extends Product {
+  instructionsLink;
+  warrantyLink;
+
+  constructor(productDetails) {
+    super(productDetails);
+    this.instructionsLink = productDetails.instructionsLink;
+    this.warrantyLink = productDetails.warrantyLink;
+  }
+
+  extraInfoHTML() {
+    return `
+      <a href="${this.instructionsLink}" target="_blank">Instructions</a>
+      <br>
+      <a href="${this.warrantyLink}" target="_blank">Warranty</a>
+    `;
+  }
+}
+
+
+
 /*
 const date = new Date();
 console.log(date);
@@ -70,15 +91,30 @@ console.log(date.toLocaleTimeString());
 export let products = [];
 
 export function loadProductsFetch() {
+  const applianceProductIds = [
+    "54e0eccd-8f36-462b-b68a-8182611d9add", 
+    "c2a82c5e-aff4-435f-9975-517cfaba2ece",
+    "0d7f9afa-2efe-4fd9-b0fd-ba5663e0a524", 
+    "77a845b1-16ed-4eac-bdf9-5b591882113d", 
+    "4e37dd03-3b23-4bc6-9ff8-44e112a92c64"  
+  ];
   const promise = fetch(
-  'https://supersimplebackend.dev/products'
+   'https://supersimplebackend.dev/products'
   ).then((response) => {
     return response.json();
   }).then((productsData) => {
       products = productsData.map((productDetails) => {
-        if(productDetails.type === 'clothing') {
-          return  new Clothing(productDetails);
+        if (applianceProductIds.includes(productDetails.id)) {
+          productDetails.type = "appliance";
+          productDetails.instructionsLink = "images/appliance-instructions.png";
+          productDetails.warrantyLink = "images/appliance-warranty.png";
+          return new Appliance(productDetails);
         }
+      
+        if (productDetails.type === "clothing") {
+          return new Clothing(productDetails);
+        }
+    
         return new Product(productDetails);
       });
       console.log('load products');
@@ -99,9 +135,24 @@ export function loadProducts(fun) {
 
   xhr.addEventListener('load' , () => {
    products = JSON.parse(xhr.response).map((productDetails) => {
-    if(productDetails.type === 'clothing') {
-      return  new Clothing(productDetails);
+    const applianceProductIds = [
+      "54e0eccd-8f36-462b-b68a-8182611d9add",
+      "c2a82c5e-aff4-435f-9975-517cfaba2ece",
+      "0d7f9afa-2efe-4fd9-b0fd-ba5663e0a524", 
+      "77a845b1-16ed-4eac-bdf9-5b591882113d", 
+      "4e37dd03-3b23-4bc6-9ff8-44e112a92c64"  
+    ];
+    if (applianceProductIds.includes(productDetails.id)) {
+      productDetails.type = "appliance";
+      productDetails.instructionsLink = "images/appliance-instructions.png";
+      productDetails.warrantyLink = "images/appliance-warranty.png";
+      return new Appliance(productDetails);
     }
+  
+    if (productDetails.type === "clothing") {
+      return new Clothing(productDetails);
+    }
+
     return new Product(productDetails);
   });
   console.log('load products');
