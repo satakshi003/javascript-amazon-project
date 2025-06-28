@@ -11,6 +11,10 @@ async function loadPage() {
   let ordersHTML = '';
 
   orders.forEach((order) => {
+    if (!order || !order.id) {
+      console.warn('Skipping invalid order:', order);
+      return;
+      }
     const orderTimeString = dayjs(order.orderTime).format('MMMM D');
 
     ordersHTML += `
@@ -24,13 +28,13 @@ async function loadPage() {
               </div>
               <div class="order-total">
                 <div class="order-header-label">Total:</div>
-                <div>$${formatCurrency(order.totalCostCents)}</div>
+                <div>$${formatCurrency(order.totalCostCents || 0)}</div>
               </div>
             </div>
 
             <div class="order-header-right-section">
               <div class="order-header-label">Order ID:</div>
-              <div>${order.id}</div>
+              <div>${order.id || 'N/A'}</div>
             </div>
           </div>
 
@@ -43,7 +47,7 @@ async function loadPage() {
 
   function productsListHTML(order) {
     let productsHTML = '';
-    order.products.forEach((productDetails) => {
+   ( order.products || []).forEach((productDetails) => {
       const product = getProduct(productDetails.productId);
 
 
