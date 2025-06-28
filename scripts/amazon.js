@@ -14,7 +14,15 @@ let productsHTML = '';
   let filteredProducts = products;
   if (search) {
     filteredProducts = products.filter((product) => {
-      return product.name.includes(search);
+     let matchingKeyword = false;
+
+     product.keywords.forEach((keyword) => {
+      if (keyword.toLowerCase().includes(search.toLowerCase())) {
+        matchingKeyword = true;
+        }
+     });
+     return matchingKeyword ||
+     product.name.toLowerCase().includes(search.toLowerCase());
     });
   }
 
