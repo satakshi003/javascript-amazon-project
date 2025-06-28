@@ -102,7 +102,18 @@ export function loadCart(fun) {
   const xhr = new XMLHttpRequest();
 
   xhr.addEventListener('load' , () => {
-  console.log(xhr.response);
+  /*console.log(xhr.response);
+  fun();
+  */
+  const responseData = JSON.parse(xhr.response);
+
+  cart = responseData.map(item => ({
+    productId: item.productId,
+    quantity: item.quantity || 0,
+    deliveryOptionId: item.deliveryOptionId || '1'
+  }));
+
+  saveToStorage();
   fun();
   });
 
@@ -112,7 +123,17 @@ export function loadCart(fun) {
 
 export async function loadCartFetch() {
   const response = await fetch('https://supersimplebackend.dev/cart');
-  const text = await response.text();
+ /* const text = await response.text();
   console.log(text);
   return text;
+  */
+  const json = await response.json();
+
+  cart = json.map(item => ({
+    productId: item.productId,
+    quantity: item.quantity || 0,
+    deliveryOptionId: item.deliveryOptionId || '1'
+  }));
+
+  saveToStorage();
 }
