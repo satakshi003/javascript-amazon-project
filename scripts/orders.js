@@ -4,6 +4,7 @@ import dayjs from 'https://unpkg.com/dayjs@1.11.10/esm/index.js';
 import { formatCurrency } from "./utils/money.js";
 import { addToCart } from "../data/cart.js";
 import { renderCheckoutHeader } from "./checkout/checkoutHeader.js";
+import { setupSearchBar } from "./search.js";
 
 async function loadPage() {
   await loadProductsFetch();
@@ -114,4 +115,6 @@ document.querySelectorAll('.js-buy-again').forEach((button) => {
 });
 }
 
-loadPage();
+loadPage().then(() => {
+  setupSearchBar();
+});

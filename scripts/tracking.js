@@ -1,5 +1,6 @@
 import { getProduct, loadProductsFetch } from '../data/products.js';
 import {getOrder} from '../data/orders.js';
+import { setupSearchBar } from './search.js';
 import dayjs from 'https://unpkg.com/dayjs@1.11.10/esm/index.js';
 
 async function loadPage() {
@@ -100,4 +101,6 @@ requestAnimationFrame(() => {
 });
 }
 
-loadPage();
+loadPage().then(() => {
+  setupSearchBar();
+});
