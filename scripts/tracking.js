@@ -82,13 +82,22 @@ let trackingHTML = `
         </div>
 
         <div class="progress-bar-container">
-          <div class="progress-bar" style="width: ${percentProgress}%;">
+          <div class="progress-bar" style="width: 0%;">
           </div>
         </div>
 
 `;
 document.querySelector('.js-order-tracking').innerHTML = trackingHTML;
 
+const progressBar = document.querySelector('.progress-bar');
+
+progressBar.offsetWidth;
+
+progressBar.style.width = `${percentProgress}%`;
+
+requestAnimationFrame(() => {
+  document.querySelector('.progress-bar').style.width = `${percentProgress}%`;
+});
 }
 
 loadPage();
