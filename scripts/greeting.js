@@ -12,6 +12,9 @@ export function setupUserGreeting() {
   }
 
   if (userName) {
-    greetingContainer.textContent = `Hello, ${userName}! Welcome back.`;
+    greetingContainer.innerHTML = `Hello, <span>${userName}</span>! Welcome back.`;
   }
+  greetingContainer.classList.add('show');
+
 }
+

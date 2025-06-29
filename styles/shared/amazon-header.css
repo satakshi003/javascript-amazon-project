@@ -1,5 +1,6 @@
 .amazon-header {
   background-color: rgb(19, 25, 33);
+  backdrop-filter: blur(10px);
   color: white;
   padding-left: 15px;
   padding-right: 15px;

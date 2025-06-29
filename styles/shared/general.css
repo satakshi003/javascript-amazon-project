@@ -135,13 +135,22 @@ input:focus {
   transition: width 1.5s ease;
 }
 .user-greeting {
-  color: #f0c14b;
+  background-color: #232f3e;
+  color: #ffffff;
+  font-size: 12px;
   font-weight: 500;
-  font-size: 14px;
-  margin-left: 12px;
-  padding: 2px 6px;
-  border-radius: 3px;
-  background-color: rgba(255, 255, 255, 0.1);
+  padding: 2px;
+  border-radius: 4px;
+  margin-left: 0px;
+  margin-right: 10px;
+  margin-top: 0px;
+  display: inline-block;
+  transition: all 0.3s ease;
+  white-space: nowrap;
+}
+.user-greeting span {
+  color: #f0c14b;      
+  font-weight: 700;
 }
 
 .user-greeting:hover {
@@ -149,3 +158,12 @@ input:focus {
   cursor: pointer;
   transition: background-color 0.3s;
 }
+.user-greeting {
+  transition: opacity 0.5s ease;
+  opacity: 0;
+}
+
+.user-greeting.show {
+  opacity: 1;
+}
+
